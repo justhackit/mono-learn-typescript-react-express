@@ -1,0 +1,15 @@
+{
+  "name": "mono-learn-typescript-react-express",
+  "version": "1.0.0",
+  "main": "index.js",
+"private":true,
+  "repository": "git@github.com:justhackit/mono-learn-typescript-react-express.git",
+  "author": "justhackit <aj.nextstep@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "lerna": "^6.6.1"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}
