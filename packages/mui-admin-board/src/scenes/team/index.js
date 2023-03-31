@@ -1,11 +1,11 @@
 import { Box, Typography } from '@mui/material';
 
-const Dashboard = () => {
+const Team = () => {
   return (
     <Box textAlign="center" sx={{ border: 1 }}>
-      <Typography variant="h3">Dashboard</Typography>
+      <Typography variant="h3">Team</Typography>
     </Box>
   );
 };
 
-export default Dashboard;
+export default Team;

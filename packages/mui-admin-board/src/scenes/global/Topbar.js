@@ -1,5 +1,5 @@
 import { Box, IconButton, useTheme } from '@mui/material';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { ColorModeContext, tokens } from '../../theme';
 import InputBase from '@mui/material/InputBase';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
@@ -8,6 +8,7 @@ import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import SearchIcon from '@mui/icons-material/Search';
+import GoogleAuth from './GoogleAuth';
 
 const Topbar = () => {
   const theme = useTheme();
@@ -15,7 +16,12 @@ const Topbar = () => {
   const colorMode = useContext(ColorModeContext);
 
   return (
-    <Box display="flex" justifyContent="space-between" p={2} sx={{ border: 1 }}>
+    <Box
+      display="flex"
+      justifyContent="space-between"
+      p={2}
+      backgroundColor={colors.primary[400]}
+    >
       {/* SEARCH BAR */}
       <Box
         display="flex"
@@ -30,7 +36,7 @@ const Topbar = () => {
       </Box>
 
       {/* ICONS */}
-      <Box display="flex" sx={{ border: 1 }}>
+      <Box display="flex">
         <IconButton onClick={colorMode.toggleColorMode}>
           {theme.palette.mode === 'dark' ? (
             <DarkModeOutlinedIcon />
@@ -45,7 +51,7 @@ const Topbar = () => {
           <SettingsOutlinedIcon />
         </IconButton>
         <IconButton>
-          <PersonOutlinedIcon />
+          <GoogleAuth />
         </IconButton>
       </Box>
     </Box>

@@ -17,11 +17,27 @@ import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import MapOutlinedIcon from '@mui/icons-material/MapOutlined';
 
-const Sidebar = () => {
+import { connect } from 'react-redux';
+
+const Sidebar = (props) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState('Dashboard');
+
+  const Item = ({ title, to, icon, selected, setSelected }) => {
+    return (
+      <MenuItem
+        active={selected === title}
+        style={{ color: colors.grey[100] }}
+        onClick={() => setSelected(title)}
+        icon={icon}
+      >
+        <Typography>{title}</Typography>
+        <Link to={to} />
+      </MenuItem>
+    );
+  };
 
   return (
     <Box
@@ -41,41 +57,99 @@ const Sidebar = () => {
         '& .pro-menu-item.active': {
           color: '#6870fa !important',
         },
-        border: 1,
       }}
     >
       <ProSidebar collapsed={isCollapsed}>
-        <Menu iconShape="square">
-          {/* LOGO AND MENU ICON */}
-          <MenuItem
-            onClick={() => setIsCollapsed(!isCollapsed)}
-            icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
-            style={{
-              margin: '10px 0 20px 0',
-              color: colors.grey[100],
-            }}
-          >
-            {!isCollapsed && (
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-                ml="15px"
-                sx={{ border: 1 }}
-              >
-                <Typography variant="h3" color={colors.grey[100]}>
-                  ADMINS
-                </Typography>
-                <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
-                  <MenuOutlinedIcon />
-                </IconButton>
+        {props.isUserSignedIn && (
+          <Menu iconShape="square">
+            {/* LOGO AND MENU ICON */}
+            <MenuItem
+              onClick={() => setIsCollapsed(!isCollapsed)}
+              icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
+              style={{
+                margin: '10px 0 20px 0',
+                color: colors.grey[100],
+              }}
+            >
+              {!isCollapsed ? (
+                <Box
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  ml="15px"
+                >
+                  <Typography variant="h3" color={colors.grey[100]}>
+                    Menu
+                  </Typography>
+                  <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
+                    <MenuOutlinedIcon />
+                  </IconButton>
+                </Box>
+              ) : undefined}
+            </MenuItem>
+            {/* USER */}
+            {!isCollapsed ? (
+              <Box mb="25px">
+                <Box display="flex" justifyContent="center" alignItems="center">
+                  <img
+                    alt="profile-user"
+                    width="80px"
+                    height="80px"
+                    src={props.profilePic}
+                    style={{ cursor: 'pointer', borderRadius: '50%' }}
+                  />
+                </Box>
+                <Box textAlign="center">
+                  <Typography
+                    variant="h3"
+                    color={colors.grey[100]}
+                    fontWeight="bold"
+                    sx={{ m: '10px 0 0 0' }}
+                  >
+                    {props.fullName}
+                  </Typography>
+                </Box>
               </Box>
-            )}
-          </MenuItem>
-        </Menu>
+            ) : undefined}
+            {/* MENU ITEMS*/}
+            <Box
+              paddingLeft={isCollapsed ? undefined : '10%'}
+              sx={{ border: 1 }}
+            >
+              <Item
+                title="Dashboard"
+                to="/"
+                icon={<HomeOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
+                title="Manage Team"
+                to="/team"
+                icon={<PeopleOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+            </Box>
+          </Menu>
+        )}
       </ProSidebar>
     </Box>
   );
 };
 
-export default Sidebar;
+const mapStateToProps = (state) => {
+  return {
+    isUserSignedIn:
+      state.userAuth.isSignedIn === null ? null : state.userAuth.isSignedIn,
+    fullName:
+      state.userAuth.authInfo === null
+        ? null
+        : state.userAuth.authInfo.fullName,
+    profilePic:
+      state.userAuth.authInfo === null
+        ? '../../../../assets/Emmit_Otterton.jpg'
+        : state.userAuth.authInfo.profilePic,
+  };
+};
+export default connect(mapStateToProps)(Sidebar);
