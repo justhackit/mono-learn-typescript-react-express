@@ -22,7 +22,7 @@ jobs:
         run: |
           yarn install --frozen-lockfile
           cd packages/mui-admin-board && yarn install --frozen-lockfile
-          cd ../backend && yarn install --frozen-lockfile
+          cd ../learn-typescript && yarn install --frozen-lockfile
 
       - name: Build React frontend
         if: github.event_name == 'push' && contains(github.event.path, 'packages/mui-admin-board')
