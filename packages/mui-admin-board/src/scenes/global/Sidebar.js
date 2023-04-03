@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ProSidebar, Menu, MenuItem } from 'react-pro-sidebar';
+import { ProSidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import { Box, IconButton, Typography, useTheme } from '@mui/material';
 import { Link } from 'react-router-dom';
 import 'react-pro-sidebar/dist/css/styles.css';
@@ -16,6 +16,8 @@ import PieChartOutlineOutlinedIcon from '@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import MapOutlinedIcon from '@mui/icons-material/MapOutlined';
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 import { connect } from 'react-redux';
 
@@ -123,13 +125,26 @@ const Sidebar = (props) => {
                 selected={selected}
                 setSelected={setSelected}
               />
-              <Item
+              <SubMenu
                 title="Manage Team"
-                to="/team"
+                style={{ color: colors.grey[100] }}
                 icon={<PeopleOutlinedIcon />}
-                selected={selected}
-                setSelected={setSelected}
-              />
+              >
+                <Item
+                  title="Member"
+                  to="/team"
+                  icon={<PersonAddAlt1Icon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                <Item
+                  title="Timesheets"
+                  to="/team"
+                  icon={<CalendarMonthIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+              </SubMenu>
             </Box>
           </Menu>
         )}

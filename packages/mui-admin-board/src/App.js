@@ -6,6 +6,8 @@ import Topbar from './scenes/global/Topbar';
 import Sidebar from './scenes/global/Sidebar';
 import Dashboard from './scenes/dashboard';
 import Team from './scenes/team';
+import LoginPage from './scenes/login';
+import AuthProtectedRoute from './scenes/login/AuthProtectedRoute';
 /*import Invoices from './scenes/invoices';
 import Contacts from './scenes/contacts';
 import Bar from './scenes/bar';
@@ -27,8 +29,24 @@ function App() {
           <main className="content">
             <Topbar />
             <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/team" element={<Team />} />
+              <Route
+                path="/"
+                element={
+                  <AuthProtectedRoute>
+                    {' '}
+                    <Dashboard />
+                  </AuthProtectedRoute>
+                }
+              />
+              <Route
+                path="/team"
+                element={
+                  <AuthProtectedRoute>
+                    <Team />
+                  </AuthProtectedRoute>
+                }
+              />
+              <Route path="/login" element={<LoginPage />} />
               {/* 
               <Route path="/contacts" element={<Contacts />} />
               <Route path="/invoices" element={<Invoices />} />

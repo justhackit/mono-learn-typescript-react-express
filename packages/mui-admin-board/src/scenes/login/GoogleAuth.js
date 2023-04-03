@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { signIn, signOut } from '../../redux-actions';
 import { IconButton } from '@mui/material';
+import { Button } from '@mui/material';
 import LoginIcon from '@mui/icons-material/Login';
-import LockOpenIcon from '@mui/icons-material/LockOpen';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 class GoogleAuth extends React.Component {
   componentDidMount() {
@@ -44,15 +45,32 @@ class GoogleAuth extends React.Component {
       return null;
     } else if (this.props.isUserSignedIn) {
       return (
-        <IconButton type="button" sx={{ p: 1 }} onClick={this.onSignOutClicked}>
-          <LockOpenIcon />
-        </IconButton>
+        <Button
+          variant="contained"
+          onClick={this.onSignOutClicked}
+          color="error"
+          endIcon={<LogoutIcon />}
+          size="large"
+        >
+          Sign Out
+        </Button>
       );
     } else {
-      return (
-        <IconButton type="button" sx={{ p: 1 }} onClick={this.onSignInClicked}>
+      {
+        /* <IconButton type="button" sx={{ p: 1 }} onClick={this.onSignInClicked}>
           <LoginIcon />
-        </IconButton>
+        </IconButton> */
+      }
+      return (
+        <Button
+          variant="contained"
+          onClick={this.onSignInClicked}
+          color="success"
+          startIcon={<LoginIcon />}
+          size="large"
+        >
+          Sign In with Google
+        </Button>
       );
     }
   }
