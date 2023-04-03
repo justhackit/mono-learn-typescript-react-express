@@ -43,6 +43,8 @@ jobs:
         if: steps.path_filters.outputs.mui-admin-board == 'true'
         working-directory: ./packages/mui-admin-board
         run: yarn build
+        env:
+          CI: false
 
       - name: Build Express backend
         if: steps.path_filters.outputs.learn-typescript == 'true'
