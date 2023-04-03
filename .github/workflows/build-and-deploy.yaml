@@ -26,8 +26,7 @@ jobs:
 
       - name: Just to debug
         run: |
-          echo "Event name : $github.event_name"
-          echo "Path value : $github.event.path"
+          echo "${{toJSON(github.event)}}"
 
       - name: Build React frontend
         if: github.event_name == 'push' && contains(github.event.path, 'packages/mui-admin-board')
