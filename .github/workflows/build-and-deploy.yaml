@@ -4,6 +4,7 @@ on:
     branches:
       - main
     paths:
+      - '.github/workflows/*'
       - 'packages/mui-admin-board/**'
       - 'packages/learn-typescript/**'
 jobs:
@@ -24,9 +25,19 @@ jobs:
           cd packages/mui-admin-board && yarn install --frozen-lockfile
           cd ../learn-typescript && yarn install --frozen-lockfile
 
-      - name: Just to debug
+      - name: Path fiters
+        id: path_filters
+        uses: dorny/paths-filter@v2
+        with:
+          filters: |
+            learn-typescript:
+              - 'packages/learn-typescript/**'
+            mui-admin-board:
+              - 'packages/mui-admin-board/**'
+
+      - name: Just to Debug
         run: |
-          echo "${{toJSON(github.event)}}"
+          echo "${{toJSON(steps)}}"
 
       - name: Build React frontend
         if: github.event_name == 'push' && contains(github.event.path, 'packages/mui-admin-board')
