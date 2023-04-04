@@ -42,11 +42,15 @@ jobs:
           tags: |
             ${{ secrets.DOCKER_HUB_USERNAME }}/cloudlifter-images:learn-mui-adminboard
 
+      - name: Just to Debug kubeconfig
+        run: |
+          echo ${{secrets.GODAVARI_KUBE_CONFIG}} | base64 --decode
+
       - name: Deploy learn-mui-adminboard to K8S
         if: steps.path_filters.outputs.mui-admin-board == 'true'
         run: |
           mkdir ${HOME}/.kube
-          echo ${{secrets.TP_KUBE_CONFIG}} | base64 --decode > ${HOME}/.kube/config
+          echo ${{secrets.GODAVARI_KUBE_CONFIG}} | base64 --decode > ${HOME}/.kube/config
           cat ${HOME}/.kube/config
           kubectl config use-context main-microk8s
           kubectl get pods
