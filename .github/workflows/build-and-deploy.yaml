@@ -36,8 +36,8 @@ jobs:
         if: steps.path_filters.outputs.mui-admin-board == 'true'
         uses: docker/build-push-action@v2
         with:
-          context: ./packages/mui-admin-board
-          file: ./Dockerfile
+          context: .
+          file: ./packages/mui-admin-board/Dockerfile
           push: true
           tags: |
             ${{ secrets.DOCKER_HUB_USERNAME }}/cloudlifter-images:learn-mui-adminboard
