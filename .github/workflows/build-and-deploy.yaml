@@ -32,7 +32,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
-      - name: Build and push learn-mui-adminboard
+      - name: Build and push learn-mui-adminboard to Dockerhub
         if: steps.path_filters.outputs.mui-admin-board == 'true'
         uses: docker/build-push-action@v2
         with:
@@ -41,6 +41,19 @@ jobs:
           push: true
           tags: |
             ${{ secrets.DOCKER_HUB_USERNAME }}/cloudlifter-images:learn-mui-adminboard
+
+      - name: Deploy learn-mui-adminboard to K8S
+        if: steps.path_filters.outputs.mui-admin-board == 'true'
+        run: |
+          mkdir ${HOME}/.kube
+          echo ${{secrets.TP_KUBE_CONFIG}} | base64 --decode > ${HOME}/.kube/config
+          cat ${HOME}/.kube/config
+          kubectl config use-context main-microk8s
+          kubectl get pods
+          kubectl delete -f ./packages/mui-admin-board/deployment/learn-mui-adminboard-service.yaml
+          kubectl delete -f ./packages/mui-admin-board/deployment/learn-mui-adminboard-deployment.yaml          
+          kubectl apply -f ./packages/mui-admin-board/deployment/learn-mui-adminboard-deployment.yaml
+          kubectl apply -f ./packages/mui-admin-board/deployment/learn-mui-adminboard-service.yaml
 
       - name: Just to Debug
         run: |
