@@ -19,12 +19,6 @@ jobs:
         with:
           node-version: '14.x'
 
-      - name: Install dependencies
-        run: |
-          yarn install --frozen-lockfile
-          cd packages/mui-admin-board && yarn install --frozen-lockfile
-          cd ../learn-typescript && yarn install --frozen-lockfile
-
       - name: Path fiters
         id: path_filters
         uses: dorny/paths-filter@v2
@@ -39,14 +33,20 @@ jobs:
         run: |
           echo "${{toJSON(steps)}}"
 
-      - name: Build React frontend
+      - name: Build mui-admin-board
         if: steps.path_filters.outputs.mui-admin-board == 'true'
         working-directory: ./packages/mui-admin-board
-        run: yarn build
+        run: |
+          yarn install --frozen-lockfile
+          yarn build
         env:
           CI: false
 
-      - name: Build Express backend
+      - name: Build learn-typescript
         if: steps.path_filters.outputs.learn-typescript == 'true'
         working-directory: ./packages/learn-typescript
-        run: yarn build
+        run: |
+          yarn install --frozen-lockfile              
+          yarn build
+        env:
+          CI: false
