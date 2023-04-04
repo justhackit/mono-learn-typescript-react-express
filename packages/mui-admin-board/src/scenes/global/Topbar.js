@@ -1,10 +1,5 @@
 import { Box, IconButton, useTheme } from '@mui/material';
-import { useContext, useState } from 'react';
-import { ColorModeContext, tokens } from '../../theme';
-import InputBase from '@mui/material/InputBase';
-import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
-import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
-import SearchIcon from '@mui/icons-material/Search';
+import { tokens } from '../../theme';
 import GoogleAuth from '../login/GoogleAuth';
 import { connect } from 'react-redux';
 import backImg from '../../data/topbar_img.png';
@@ -12,7 +7,6 @@ import backImg from '../../data/topbar_img.png';
 const Topbar = (props) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const colorMode = useContext(ColorModeContext);
 
   return (
     <div>

@@ -1,13 +1,12 @@
 import { Box, Typography, useTheme } from '@mui/material';
 import GoogleAuth from './GoogleAuth';
 import { tokens } from '../../theme';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 const LoginPage = (props) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  let location = useLocation();
   return (
     <>
       {props.isUserSignedIn ? (

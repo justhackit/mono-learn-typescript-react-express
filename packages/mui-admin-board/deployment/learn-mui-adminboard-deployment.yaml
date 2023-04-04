@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: learnmui-app-deployment
+  name: learnmui-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: learnmui-app-deployment
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: learnmui-app-deployment
+    spec:
+      containers:
+        - name: learnmui-app-deployment
+          image: ajayedap/cloudlifter-images:learn-mui-adminboard
+          args:
+            - 'nginx'
+            - '-g'
+            - 'daemon off;'
+          #We don't need env here, but just keeping it.
+          env:
+            - name: COMMS_EMAIL_ID
+              valueFrom:
+                secretKeyRef:
+                  name: gmail-pwd-secret
+                  key: emailid
+            - name: COMMS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: gmail-pwd-secret
+                  key: password
+          imagePullPolicy: Always
+      imagePullSecrets:
+        - name: dockercreds

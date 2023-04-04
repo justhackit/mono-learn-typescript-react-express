@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { signIn, signOut } from '../../redux-actions';
-import { IconButton } from '@mui/material';
 import { Button } from '@mui/material';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -56,11 +55,6 @@ class GoogleAuth extends React.Component {
         </Button>
       );
     } else {
-      {
-        /* <IconButton type="button" sx={{ p: 1 }} onClick={this.onSignInClicked}>
-          <LoginIcon />
-        </IconButton> */
-      }
       return (
         <Button
           variant="contained"
