@@ -2,7 +2,7 @@
   "name": "mono-learn-typescript-react-express",
   "version": "1.0.0",
   "main": "index.js",
-"private":true,
+  "private": true,
   "repository": "git@github.com:justhackit/mono-learn-typescript-react-express.git",
   "author": "justhackit <aj.nextstep@gmail.com>",
   "license": "MIT",
