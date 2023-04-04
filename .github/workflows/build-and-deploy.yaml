@@ -37,7 +37,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./packages/mui-admin-board/Dockerfile
+          file: /packages/mui-admin-board/Dockerfile
           push: true
           tags: |
             ${{ secrets.DOCKER_HUB_USERNAME }}/cloudlifter-images:learn-mui-adminboard
