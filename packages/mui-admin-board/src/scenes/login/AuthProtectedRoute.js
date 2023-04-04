@@ -11,7 +11,7 @@ const AuthProtectedRoute = (props) => {
     }
   }
   if (!props.isUserSignedIn) {
-    console.log('User not logged in . Redirecting to /login');
+    console.log('User not logged in. Redirecting to /login');
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
