@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . .
 # Install dependencies (npm ci makes sure the exact versions in the lockfile gets installed)
 RUN yarn install 
-RUN yarn build
+#RUN yarn build
 CMD ["yarn", "start"]
 
 # This is the best way, but facing lot of issues. So lets look at it later

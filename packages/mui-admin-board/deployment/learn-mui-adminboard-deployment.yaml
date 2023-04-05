@@ -20,9 +20,8 @@ spec:
         - name: learnmui-app-deployment
           image: ajayedap/cloudlifter-images:learn-mui-adminboard
           args:
-            - 'nginx'
-            - '-g'
-            - 'daemon off;'
+            - 'yarn'
+            - 'start'
           #We don't need env here, but just keeping it.
           env:
             - name: COMMS_EMAIL_ID
