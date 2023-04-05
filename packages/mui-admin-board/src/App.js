@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { ColorModeContext, useMode } from './theme';
 import Topbar from './scenes/global/Topbar';
@@ -27,27 +27,26 @@ function App() {
           <Sidebar />
           <main className="content">
             <Topbar />
-            <BrowserRouter basename="/learn-mui-react">
-              <Routes>
-                <Route
-                  path="/"
-                  element={
-                    <AuthProtectedRoute>
-                      {' '}
-                      <Dashboard />
-                    </AuthProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/team"
-                  element={
-                    <AuthProtectedRoute>
-                      <Team />
-                    </AuthProtectedRoute>
-                  }
-                />
-                <Route path="/login" element={<LoginPage />} />
-                {/* 
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <AuthProtectedRoute>
+                    {' '}
+                    <Dashboard />
+                  </AuthProtectedRoute>
+                }
+              />
+              <Route
+                path="/team"
+                element={
+                  <AuthProtectedRoute>
+                    <Team />
+                  </AuthProtectedRoute>
+                }
+              />
+              <Route path="/login" element={<LoginPage />} />
+              {/* 
               <Route path="/contacts" element={<Contacts />} />
               <Route path="/invoices" element={<Invoices />} />
               <Route path="/form" element={<Form />} />
@@ -57,8 +56,7 @@ function App() {
               <Route path="/faq" element={<FAQ />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/geography" element={<Geography />} /> */}
-              </Routes>
-            </BrowserRouter>
+            </Routes>
           </main>
         </div>
       </ThemeProvider>
