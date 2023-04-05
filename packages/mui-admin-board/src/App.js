@@ -29,7 +29,7 @@ function App() {
             <Topbar />
             <Routes>
               <Route
-                path="/"
+                path="/learn-mui-react/"
                 element={
                   <AuthProtectedRoute>
                     {' '}
@@ -38,14 +38,14 @@ function App() {
                 }
               />
               <Route
-                path="/team"
+                path="/learn-mui-react/team"
                 element={
                   <AuthProtectedRoute>
                     <Team />
                   </AuthProtectedRoute>
                 }
               />
-              <Route path="/login" element={<LoginPage />} />
+              <Route path="/learn-mui-react/login" element={<LoginPage />} />
               {/* 
               <Route path="/contacts" element={<Contacts />} />
               <Route path="/invoices" element={<Invoices />} />

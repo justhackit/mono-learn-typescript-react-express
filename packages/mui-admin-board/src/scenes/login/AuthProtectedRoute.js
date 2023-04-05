@@ -12,7 +12,13 @@ const AuthProtectedRoute = (props) => {
   }
   if (!props.isUserSignedIn) {
     console.log('User not logged in. Redirecting to /login');
-    return <Navigate to="/login" state={{ from: location }} replace />;
+    return (
+      <Navigate
+        to="/learn-mui-react/login"
+        state={{ from: location }}
+        replace
+      />
+    );
   }
 
   return props.children;
