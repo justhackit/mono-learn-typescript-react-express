@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 const Sidebar = (props) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
   const [selected, setSelected] = useState('Dashboard');
 
   const Item = ({ title, to, icon, selected, setSelected }) => {
