@@ -1,29 +1,5 @@
 Followed this tutorial : https://www.youtube.com/watch?v=wYpCWwD1oz0
 
-# Dependencies added:
-
-```
-npx lerna add @mui/material --scope mui-admin-board
-npx lerna add @emotion/react --scope mui-admin-board
-npx lerna add @emotion/styled --scope mui-admin-board
-npx lerna add @mui/x-data-grid --scope mui-admin-board
-npx lerna add @mui/icons-material --scope mui-admin-board
-npx lerna add react-router-dom@6 --scope mui-admin-board
-npx lerna add react-pro-sidebar@0.7.1 --scope mui-admin-board
-npx lerna add formik --scope mui-admin-board
-npx lerna add yup --scope mui-admin-board
-npx lerna add @fullcalendar/daygrid --scope mui-admin-board
-npx lerna add @fullcalendar/timegrid --scope mui-admin-board
-npx lerna add @fullcalendar/list --scope mui-admin-board
-npx lerna add @nivo/core --scope mui-admin-board
-npx lerna add @nivo/pie --scope mui-admin-board
-npx lerna add @nivo/line --scope mui-admin-board
-npx lerna add @nivo/bar --scope mui-admin-board
-npx lerna add @nivo/geo --scope mui-admin-board
-npx lerna add react-redux --scope mui-admin-board
-npx lerna add redux --scope mui-admin-board
-```
-
 ### `yarn start`
 
 Runs the app in the development mode.\

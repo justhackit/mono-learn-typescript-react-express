@@ -10,4 +10,4 @@ spec:
     app: learnmui-app-deployment
   ports:
     - port: 8090
-      targetPort: 8090
+      targetPort: 3000
