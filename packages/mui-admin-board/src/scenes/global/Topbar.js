@@ -2,7 +2,7 @@ import { Box, IconButton, useTheme } from '@mui/material';
 import { tokens } from '../../theme';
 import GoogleAuth from '../login/GoogleAuth';
 import { connect } from 'react-redux';
-import backImg from '../../data/topbar_img.png';
+import { Typography } from '@mui/material';
 
 const Topbar = (props) => {
   const theme = useTheme();
@@ -13,14 +13,20 @@ const Topbar = (props) => {
       {props.isUserSignedIn && (
         <Box
           display="flex"
-          justifyContent="flex-end"
+          justifyContent="space-between"
           p={2}
           backgroundColor={colors.primary[400]}
-          style={{
-            backgroundImage: `url(${backImg})`,
-            backgroundSize: 'cover',
-          }}
         >
+          <Box
+            display="flex"
+            backgroundColor={colors.primary[400]}
+            borderRadius="3px"
+          >
+            <Typography variant="h1" color={colors.grey[100]}>
+              The Root App
+            </Typography>
+          </Box>
+
           {/* SEARCH BAR */}
           {/* <Box
             display="flex"
@@ -43,9 +49,7 @@ const Topbar = (props) => {
                 <LightModeOutlinedIcon />
               )}
             </IconButton> */}
-            <IconButton>
-              <GoogleAuth />
-            </IconButton>
+            <GoogleAuth />
           </Box>
         </Box>
       )}

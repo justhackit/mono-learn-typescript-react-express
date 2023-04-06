@@ -85,6 +85,7 @@ const Sidebar = (props) => {
               <Box mb="25px">
                 <Box display="flex" justifyContent="center" alignItems="center">
                   <img
+                    referrerpolicy="no-referrer"
                     alt="profile-user"
                     width="80px"
                     height="80px"
