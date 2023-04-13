@@ -60,4 +60,5 @@ npx lerna add @nivo/bar --scope mui-admin-board
 npx lerna add @nivo/geo --scope mui-admin-board
 npx lerna add react-redux --scope mui-admin-board
 npx lerna add redux --scope mui-admin-board
+npx lerna add axios
 ```

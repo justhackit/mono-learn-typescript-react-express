@@ -6,7 +6,7 @@ on:
     paths:
       - '.github/workflows/*'
       - 'packages/mui-admin-board/**'
-      - 'packages/learn-typescript/**'
+      #- 'packages/learn-typescript/**'
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest

@@ -8,6 +8,7 @@ const AuthProtectedRoute = (props) => {
     if (props.tokenExpiresAt < Date.now()) {
       console.log('Token expired. Triggered signOut');
       props.signOut();
+      return <Navigate to="/login" state={{ from: location }} replace />;
     }
   }
   if (!props.isUserSignedIn) {
