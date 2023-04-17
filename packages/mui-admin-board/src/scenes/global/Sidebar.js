@@ -9,6 +9,8 @@ import PeopleOutlinedIcon from '@mui/icons-material/PeopleOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import HandymanIcon from '@mui/icons-material/Handyman';
+import BuildIcon from '@mui/icons-material/Build';
 
 import { connect } from 'react-redux';
 
@@ -133,6 +135,19 @@ const Sidebar = (props) => {
                   title="Timesheets"
                   to="/team"
                   icon={<CalendarMonthIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+              </SubMenu>
+              <SubMenu
+                title="Utilities"
+                style={{ color: colors.grey[100] }}
+                icon={<HandymanIcon />}
+              >
+                <Item
+                  title="AWS Creds"
+                  to="/aws_creds"
+                  icon={<BuildIcon />}
                   selected={selected}
                   setSelected={setSelected}
                 />

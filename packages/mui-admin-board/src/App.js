@@ -7,6 +7,7 @@ import Dashboard from './scenes/dashboard';
 import Team from './scenes/team';
 import LoginPage from './scenes/login';
 import AuthProtectedRoute from './scenes/login/AuthProtectedRoute';
+import AWS_Creds from './scenes/utilities/AWS_Creds';
 /*import Invoices from './scenes/invoices';
 import Contacts from './scenes/contacts';
 import Bar from './scenes/bar';
@@ -42,6 +43,14 @@ function App() {
                 element={
                   <AuthProtectedRoute>
                     <Team />
+                  </AuthProtectedRoute>
+                }
+              />
+              <Route
+                path="/aws_creds"
+                element={
+                  <AuthProtectedRoute>
+                    <AWS_Creds />
                   </AuthProtectedRoute>
                 }
               />

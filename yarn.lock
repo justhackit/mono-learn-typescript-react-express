@@ -3189,6 +3189,11 @@
     "@types/qs" "*"
     "@types/serve-static" "*"
 
+"@types/google.maps@^3.52.5":
+  version "3.52.5"
+  resolved "https://registry.yarnpkg.com/@types/google.maps/-/google.maps-3.52.5.tgz#84322c45fcfac76ecd80afc8b6115b1be2f7dc96"
+  integrity sha512-nhFo5xLsWnjr2zuL0V5khlpo2pPFXJzYdnuIt3hLBGgcvMkLfRqKP8TdKrjh0gUuWfm55Iex+3XU1v+oAyu1jw==
+
 "@types/graceful-fs@^4.1.2":
   version "4.1.6"
   resolved "https://registry.yarnpkg.com/@types/graceful-fs/-/graceful-fs-4.1.6.tgz#e14b2576a1c25026b7f02ede1de3b84c3a1efeae"
