@@ -44,7 +44,7 @@ Expiration=${dateObject.toISOString()}
     >
       <TextField
         label="Creds JSON"
-        fullWidth
+        style={{ width: '80%' }}
         multiline
         defaultValue={creds}
         onChange={(e) => {
@@ -54,6 +54,7 @@ Expiration=${dateObject.toISOString()}
       <TextField
         label="Your ~.aws/credentails format"
         multiline
+        style={{ width: '80%' }}
         defaultValue={formattedCreds}
       />
       <Box display="flex" justifyContent="center">
