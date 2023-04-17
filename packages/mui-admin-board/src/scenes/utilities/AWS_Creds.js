@@ -30,7 +30,6 @@ Expiration=${dateObject.toISOString()}
   }, [creds]);
 
   return (
-    //return a div centered at the sceen
     <Box
       component="form"
       display="flex"
