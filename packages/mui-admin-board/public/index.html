@@ -14,6 +14,37 @@
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
+    <script>
+      (function (n, i, v, r, s, c, x, z) {
+        x = window.AwsRumClient = { q: [], n: n, i: i, v: v, r: r, c: c };
+        window[n] = function (c, p) {
+          x.q.push({ c: c, p: p });
+        };
+        z = document.createElement('script');
+        z.async = true;
+        z.src = s;
+        document.head.insertBefore(
+          z,
+          document.head.getElementsByTagName('script')[0]
+        );
+      })(
+        'cwr',
+        '2f19aa18-e331-4640-8375-7ac65af5a197',
+        '1.0.0',
+        'us-east-2',
+        'https://client.rum.us-east-1.amazonaws.com/1.13.6/cwr.js',
+        {
+          sessionSampleRate: 1,
+          guestRoleArn:
+            'arn:aws:iam::676755168728:role/RUM-Monitor-us-east-2-676755168728-9395388806861-Unauth',
+          identityPoolId: 'us-east-2:755c2b2a-e571-4d71-b8d9-af503f7bc827',
+          endpoint: 'https://dataplane.rum.us-east-2.amazonaws.com',
+          telemetries: ['performance', 'errors', 'http'],
+          allowCookies: true,
+          enableXRay: false,
+        }
+      );
+    </script>
     <script src="https://apis.google.com/js/api.js"></script>
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <link
