@@ -34,6 +34,7 @@ Expiration=${dateObject.toISOString()}
       component="form"
       display="flex"
       flexDirection="column"
+      justifyContent="center"
       sx={{
         '& .MuiTextField-root': { m: 1, width: '25ch' },
         border: 1,
@@ -56,12 +57,18 @@ Expiration=${dateObject.toISOString()}
         style={{ width: '80%' }}
         defaultValue={formattedCreds}
       />
-      <Box display="flex" justifyContent="center">
+      <Box
+        display="flex"
+        flexDirection="row"
+        justifyContent="center"
+        margin={2}
+      >
         <Button
           variant="contained"
           onClick={() => {
             const tmp = formattedCreds.split('\n').slice(0, 4);
             const clipboardStr = `${tmp[0]}
+            
 ${tmp[1]}
 ${tmp[2]}
 ${tmp[3]}`;
@@ -72,6 +79,7 @@ ${tmp[3]}`;
         </Button>
         <Button
           variant="contained"
+          marginleft={2}
           onClick={() => {
             setFormattedCreds('');
           }}

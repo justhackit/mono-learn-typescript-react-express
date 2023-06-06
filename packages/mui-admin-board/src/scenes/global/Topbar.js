@@ -23,7 +23,7 @@ const Topbar = (props) => {
             borderRadius="3px"
           >
             <Typography variant="h1" color={colors.grey[100]}>
-              The Root App
+              The OMNI App
             </Typography>
           </Box>
 
