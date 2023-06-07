@@ -65,8 +65,8 @@ jobs:
           echo ${{secrets.GODAVARI_ARM_KUBE_CONFIG}} | base64 --decode > ${HOME}/.kube/config
           cat ${HOME}/.kube/config
           kubectl get pods
-          kubectl delete -f ./packages/mui-admin-board/deployment/learn-mui-adminboard-service.yaml
-          kubectl delete -f ./packages/mui-admin-board/deployment/learn-mui-adminboard-deployment.yaml          
+          kubectl delete --ignore-not-found=true -f ./packages/mui-admin-board/deployment/learn-mui-adminboard-service.yaml
+          kubectl delete --ignore-not-found=true -f ./packages/mui-admin-board/deployment/learn-mui-adminboard-deployment.yaml          
           kubectl apply -f ./packages/mui-admin-board/deployment/learn-mui-adminboard-deployment.yaml
           kubectl apply -f ./packages/mui-admin-board/deployment/learn-mui-adminboard-service.yaml
 
