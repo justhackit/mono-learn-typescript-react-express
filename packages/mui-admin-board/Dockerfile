@@ -13,7 +13,7 @@ WORKDIR /app
 # Copy app files
 COPY package.json yarn.lock ./ 
 # Install dependencies (npm ci makes sure the exact versions in the lockfile gets installed)
-RUN rm -rf node_modules/.yarn-integrity && yarn install --production --network-timeout 500000 && yarn cache clean
+RUN yarn install --production --network-timeout 500000 && yarn cache clean
 COPY . . 
 RUN yarn build
 #CMD ["yarn", "start"]
