@@ -2,11 +2,12 @@
 #To Push : docker tag learn-mui-adminboard:v0.1 ajayedap/cloudlifter-images:learn-mui-adminboard;docker push ajayedap/cloudlifter-images:learn-mui-adminboard
 #To Run on local: docker run -p 8090:8090  learn-mui-adminboard:v0.1
 FROM node:16-alpine as builder
-## Install python/pip as we need it for one of node's dependency in arm64
+#============= Install these as we need it for one of node's dependency in arm64========================
 ENV PYTHONUNBUFFERED=1
-RUN apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
+RUN apk add --update --no-cache python3 build-base make && ln -sf python3 /usr/bin/python
 RUN python3 -m ensurepip
 RUN pip3 install --no-cache --upgrade pip setuptools
+#=============================================================================================================
 # Set the working directory to /app inside the container
 WORKDIR /app
 # Copy app files
