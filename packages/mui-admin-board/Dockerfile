@@ -7,7 +7,7 @@ WORKDIR /app
 # Copy app files
 COPY . .
 # Install dependencies (npm ci makes sure the exact versions in the lockfile gets installed)
-RUN yarn install 
+RUN yarn install --network-timeout 500000
 RUN yarn build
 #CMD ["yarn", "start"]
 
