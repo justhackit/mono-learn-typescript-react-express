@@ -64,7 +64,6 @@ jobs:
           mkdir ${HOME}/.kube
           echo ${{secrets.GODAVARI_ARM_KUBE_CONFIG}} | base64 --decode > ${HOME}/.kube/config
           cat ${HOME}/.kube/config
-          kubectl config use-context main-microk8s
           kubectl get pods
           kubectl delete -f ./packages/mui-admin-board/deployment/learn-mui-adminboard-service.yaml
           kubectl delete -f ./packages/mui-admin-board/deployment/learn-mui-adminboard-deployment.yaml          
