@@ -8,15 +8,6 @@ import Team from './scenes/team';
 import LoginPage from './scenes/login';
 import AuthProtectedRoute from './scenes/login/AuthProtectedRoute';
 import AWS_Creds from './scenes/utilities/AWS_Creds';
-/*import Invoices from './scenes/invoices';
-import Contacts from './scenes/contacts';
-import Bar from './scenes/bar';
-import Form from './scenes/form';
-import Line from './scenes/line';
-import Pie from './scenes/pie';
-import FAQ from './scenes/faq';
-import Geography from './scenes/geography';
-import Calendar from './scenes/calendar/calendar';*/
 
 function App() {
   const [theme, colorMode] = useMode();
