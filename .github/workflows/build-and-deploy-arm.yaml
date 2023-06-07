@@ -32,10 +32,14 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Set up python as node-gyp needs it
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
+      - name: Install these as needed by node-gyp for arm64
+        run: sudo apt-get install -y make gcc python3.6
+
+      - name: just some tests
+        run: |
+          make --version
+          gcc --version
+          python3 --version
 
       - name: Login to Docker Hub
         uses: docker/login-action@v2
