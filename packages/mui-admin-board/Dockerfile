@@ -5,9 +5,10 @@ FROM node:16-alpine as builder
 # Set the working directory to /app inside the container
 WORKDIR /app
 # Copy app files
-COPY . .
+COPY package.json yarn.lock ./ 
 # Install dependencies (npm ci makes sure the exact versions in the lockfile gets installed)
 RUN yarn install --production --network-timeout 500000 && yarn cache clean
+COPY . . 
 RUN yarn build
 #CMD ["yarn", "start"]
 
