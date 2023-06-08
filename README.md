@@ -61,4 +61,6 @@ npx lerna add @nivo/geo --scope mui-admin-board
 npx lerna add react-redux --scope mui-admin-board
 npx lerna add redux --scope mui-admin-board
 npx lerna add axios
+npx lerna add concurrently --dev --scope learn-typescript
+npx lerna add nodemon --dev --scope learn-typescript
 ```
