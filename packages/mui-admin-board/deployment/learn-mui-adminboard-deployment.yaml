@@ -1,11 +1,14 @@
-apiVersion: apps/v1
+#This file has 1) Deployment and 2) Service
+
+#Deployment goes here
 kind: Deployment
+apiVersion: apps/v1
 metadata:
   labels:
     app: learnmui-app-deployment
   name: learnmui-app-deployment
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: learnmui-app-deployment
@@ -18,7 +21,7 @@ spec:
     spec:
       containers:
         - name: learnmui-app-deployment
-          image: ajayedap/cloudlifter-images:learn-mui-adminboard
+          image: ajayedap/playground:learn-mui-adminboard
           args:
             - 'nginx'
             - '-g'
@@ -38,3 +41,18 @@ spec:
           imagePullPolicy: Always
       imagePullSecrets:
         - name: dockercreds
+---
+#Service goes here
+kind: Service
+apiVersion: v1
+metadata:
+  name: learnmui-app-service
+  labels:
+    app: learnmui-app-service
+spec:
+  type: ClusterIP
+  selector:
+    app: learnmui-app-deployment
+  ports:
+    - port: 8090
+      targetPort: 8090
