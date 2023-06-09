@@ -1,4 +1,6 @@
 import express, { Request, Response } from 'express'
+import os from 'os';
+import dns from 'dns';
 import bodyParser from 'body-parser';
 import { CashTransSaver, CashTransaction } from './CashTransSaver';
 const app = express();
@@ -10,11 +12,16 @@ const cashTransSaver = new CashTransSaver()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
+
 app.get("/ping", (req, res) => {
-    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+    const myhostname = os.hostname();
+    const localIp = dns.lookup(myhostname, (err, address, family) => {
+        return address
+    })
     const userAgent = req.headers['user-agent'];
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.json({ status: "Success", callerDetails: { ipAddress: ip, userAgent: userAgent } });
+    res.json({ status: "Success", callerDetails: { yourIp: ip, myIp: localIp, userAgent: userAgent } });
 });
 
 app.post("/cashtransactions", (req: Request, res: Response) => {
