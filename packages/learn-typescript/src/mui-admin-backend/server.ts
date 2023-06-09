@@ -27,12 +27,12 @@ app.post("/cashtransactions", (req: Request, res: Response) => {
                 res.status(400)
                 res.send('{"status":"Error","message":"Unable to process your request"}')
             }
-        }).catch(_e => {
+        }).catch(e => {
+            console.log(e)
             res.status(400)
             res.send('{"status":"Error","message":"Unable to process your request"}')
         })
     } catch (er) {
-        console.log(er)
         res.status(400)
         res.send('{"status":"Error","message":"Unable to process your request"}')
     }
