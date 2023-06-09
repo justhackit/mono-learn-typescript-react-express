@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: learntsc-app-service
+  labels:
+    app: learntsc-app-service
+spec:
+  type: ClusterIP
+  selector:
+    app: learntsc-app-deployment
+  ports:
+    - port: 3000
+      targetPort: 3000
