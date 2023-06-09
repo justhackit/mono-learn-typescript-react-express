@@ -1,6 +1,9 @@
 #docker buildx build --push --platform linux/arm64  -t ajayedap/playground:learn-typescript .
 FROM node:alpine
-
+#============= Install these as we need it for one of node's dependency in arm64========================
+ENV PYTHONUNBUFFERED=1
+RUN apk add --update --no-cache python3 build-base make && ln -sf python3 /usr/bin/python
+#=============================================================================================================
 WORKDIR /usr/src/app 
 
 COPY package*.json ./
