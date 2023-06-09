@@ -1,7 +1,4 @@
-#docker build  -t learn-typescript:v0.1 .
-#To Push : docker tag learn-typescript:v0.1 ajayedap/playground:learn-typescript;docker push ajayedap/playground:learn-typescript
-#docker buildx build --push --platform linux/arm64  -t playground:learn-typescript .
-#docker buildx build -t learn-typescript:v0.1 .
+#docker buildx build --push --platform linux/arm64  -t ajayedap/playground:learn-typescript .
 FROM node:alpine
 #============= Install these as we need it for one of node's dependency in arm64========================
 ENV PYTHONUNBUFFERED=1

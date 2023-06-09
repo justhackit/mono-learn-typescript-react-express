@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express'
 import bodyParser from 'body-parser';
 import { CashTransSaver, CashTransaction } from './CashTransSaver';
 const app = express();
-const port = 3001;
+const port = 3000;
 
 //Set-up db functions
 const cashTransSaver = new CashTransSaver()
