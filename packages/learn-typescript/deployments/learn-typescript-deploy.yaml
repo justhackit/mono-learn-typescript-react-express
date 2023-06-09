@@ -5,7 +5,7 @@ metadata:
     app: learntsc-app-deployment
   name: learntsc-app-deployment
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: learntsc-app-deployment
