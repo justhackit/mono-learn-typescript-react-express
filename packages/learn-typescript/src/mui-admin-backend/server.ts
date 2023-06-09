@@ -10,9 +10,11 @@ const cashTransSaver = new CashTransSaver()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-app.get("data", (_req, res) => {
+app.get("/ping", (req, res) => {
+    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    const userAgent = req.headers['user-agent'];
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.json({ foo: "bar" });
+    res.json({ status: "Success", callerDetails: { ipAddress: ip, userAgent: userAgent } });
 });
 
 app.post("/cashtransactions", (req: Request, res: Response) => {
