@@ -1,3 +1,4 @@
+#!/bin/zsh
 echo "Pulling latest changes"
 git pull
 echo "Building"
