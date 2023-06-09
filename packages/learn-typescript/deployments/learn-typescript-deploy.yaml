@@ -1,11 +1,11 @@
-apiVersion: apps/v1
 kind: Deployment
+apiVersion: apps/v1
 metadata:
   labels:
     app: learntsc-app-deployment
   name: learntsc-app-deployment
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: learntsc-app-deployment
@@ -18,7 +18,10 @@ spec:
     spec:
       containers:
         - name: learntsc-app-deployment
-          image: ajayedap/playground:learn-mui-adminboard
+          image: ajayedap/playground:learn-typescript
+          args:
+            - 'node'
+            - 'build/mui-admin-backend/server.js'
           #We don't need env here, but just keeping it.
           env:
             - name: COMMS_PASSWORD
@@ -29,3 +32,17 @@ spec:
           imagePullPolicy: Always
       imagePullSecrets:
         - name: dockercreds
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: learntsc-app-service
+  labels:
+    app: learntsc-app-service
+spec:
+  type: ClusterIP
+  selector:
+    app: learntsc-app-deployment
+  ports:
+    - port: 3000
+      targetPort: 3000

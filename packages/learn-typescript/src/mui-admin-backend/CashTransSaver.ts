@@ -18,7 +18,7 @@ export class CashTransSaver {
             //host: "host.docker.internal",
             database: "postgres",
             password: "Secret_123",
-            port: 5433,
+            port: 5432,
         });
     }
 
