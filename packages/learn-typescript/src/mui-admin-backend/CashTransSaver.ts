@@ -14,7 +14,8 @@ export class CashTransSaver {
     constructor() {
         this.pool = new Pool({
             user: "postgresadmin",
-            host: "localhost",
+            host: "postgres-service",
+            //host: "localhost",
             //host: "host.docker.internal",
             database: "postgres",
             password: "Secret_123",
