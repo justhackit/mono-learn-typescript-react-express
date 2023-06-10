@@ -8,6 +8,7 @@ import Team from './scenes/team';
 import LoginPage from './scenes/login';
 import AuthProtectedRoute from './scenes/login/AuthProtectedRoute';
 import AWS_Creds from './scenes/utilities/AWS_Creds';
+import CashTransaction from './scenes/utilities/CashTransaction';
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -42,6 +43,14 @@ function App() {
                 element={
                   <AuthProtectedRoute>
                     <AWS_Creds />
+                  </AuthProtectedRoute>
+                }
+              />
+              <Route
+                path="/cashtransaction"
+                element={
+                  <AuthProtectedRoute>
+                    <CashTransaction />
                   </AuthProtectedRoute>
                 }
               />

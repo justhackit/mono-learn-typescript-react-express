@@ -1,4 +1,5 @@
-import { SIGN_OUT, SIGN_IN } from './types';
+import { SIGN_OUT, SIGN_IN, POST_TRANSACTION } from './types';
+import omniAppService from '../apis/omniAppService';
 
 export const signIn = (user) => {
   console.log('Signing in the user.. at ' + new Date().toLocaleString());
@@ -27,5 +28,16 @@ export const signOut = () => {
   console.log('Signing out the user....');
   return {
     type: SIGN_OUT,
+  };
+};
+
+export const submitCashTransaction = (transactionPayload) => {
+  return async function (dispatch, getState) {
+    const response = await omniAppService.post(
+      '/cashtransaction',
+      transactionPayload
+    );
+    console.log('response: ' + JSON.stringify(response.data));
+    dispatch({ type: POST_TRANSACTION, payload: response.data.status });
   };
 };

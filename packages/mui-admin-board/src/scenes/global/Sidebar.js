@@ -11,6 +11,7 @@ import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import HandymanIcon from '@mui/icons-material/Handyman';
 import BuildIcon from '@mui/icons-material/Build';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 
 import { connect } from 'react-redux';
 
@@ -148,6 +149,13 @@ const Sidebar = (props) => {
                   title="AWS Creds"
                   to="/aws_creds"
                   icon={<BuildIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                <Item
+                  title="Cash Transaction"
+                  to="/cashtransaction"
+                  icon={<MonetizationOnIcon />}
                   selected={selected}
                   setSelected={setSelected}
                 />
