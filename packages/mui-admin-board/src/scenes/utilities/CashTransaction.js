@@ -6,23 +6,36 @@ import {
   Select,
   FormControl,
   InputLabel,
+  Snackbar,
 } from '@mui/material';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { connect } from 'react-redux';
 import { submitCashTransaction } from '../../redux-actions';
 
-const CashTransaction = () => {
-  const [cashTransaction, setCashTransaction] = useState({
-    transDate: '',
-    description: '',
-    amount: 0.0,
-    trans_type: 'debit',
-    category: '',
-    notes: '',
-  });
-  const [category, setCategory] = useState('Groceries');
+const CashTransaction = (props) => {
+  const buildInitialState = () => {
+    return {
+      transDate: new Date().toISOString().slice(0, 10),
+      description: '',
+      amount: 0.0,
+      transType: 'debit',
+      accountName: 'Cash',
+      category: 'Groceries',
+      notes: '',
+    };
+  };
+  const [cashTransaction, setCashTransaction] = useState(buildInitialState());
   const handleCategoryChange = (event) => {
-    setCategory(event.target.value);
+    setCashTransaction({
+      ...cashTransaction,
+      category: event.target.value,
+    });
+  };
+  const handleAccountChange = (event) => {
+    setCashTransaction({
+      ...cashTransaction,
+      accountName: event.target.value,
+    });
   };
 
   const handleCashTransactionChange = (e) => {
@@ -34,7 +47,11 @@ const CashTransaction = () => {
 
   const handleCashTransactionSubmit = () => {
     console.log(cashTransaction);
-    // dispatch(submitCashTransaction(cashTransaction));
+    props.submitCashTransaction(cashTransaction);
+  };
+
+  const handleClearCashTransaction = () => {
+    setCashTransaction(buildInitialState());
   };
 
   return (
@@ -77,16 +94,30 @@ const CashTransaction = () => {
           value={cashTransaction.amount}
           onChange={handleCashTransactionChange}
         />
-        <FormControl fullWidth>
+        <FormControl fullWidth sx={{ m: 1 }}>
           <InputLabel id="category-select-label">Category</InputLabel>
           <Select
             labelId="category-select-label"
-            value={category}
+            value={cashTransaction.category}
             label="Category"
             onChange={handleCategoryChange}
           >
             <MenuItem value={'Groceries'}>Groceries</MenuItem>
             <MenuItem value={'Shopping'}>Shopping</MenuItem>
+            <MenuItem value={'Healthcare'}>Healthcare</MenuItem>
+            <MenuItem value={'Restaurant'}>Restaurant</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl fullWidth sx={{ m: 1 }}>
+          <InputLabel id="account-select-label">Account</InputLabel>
+          <Select
+            labelId="account-select-label"
+            value={cashTransaction.accountName}
+            label="Account"
+            onChange={handleAccountChange}
+          >
+            <MenuItem value={'Cash'}>Cash</MenuItem>
+            <MenuItem value={'Contract'}>Contract</MenuItem>
           </Select>
         </FormControl>
         <TextField
@@ -103,11 +134,20 @@ const CashTransaction = () => {
           <Button variant="contained" onClick={handleCashTransactionSubmit}>
             Submit
           </Button>
-          <Button variant="contained">Clear</Button>
+          <Button variant="contained" onClick={handleClearCashTransaction}>
+            Clear
+          </Button>
         </Box>
       </Box>
     </Box>
   );
 };
 
-export default CashTransaction;
+const mapStateToProps = (state) => {
+  console.log(state.postTransStatus);
+  return { postStatus: state.postTransStatus };
+};
+
+export default connect(mapStateToProps, { submitCashTransaction })(
+  CashTransaction
+);

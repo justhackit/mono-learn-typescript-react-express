@@ -34,7 +34,7 @@ export const signOut = () => {
 export const submitCashTransaction = (transactionPayload) => {
   return async function (dispatch, getState) {
     const response = await omniAppService.post(
-      '/cashtransaction',
+      '/cashtransactions',
       transactionPayload
     );
     console.log('response: ' + JSON.stringify(response.data));
