@@ -33,7 +33,8 @@ app.post("/cashtransactions", (req: Request, res: Response) => {
             amount: req.body.amount,
             trans_type: req.body.transType,
             category: req.body.category,
-            account_name: req.body.accountName
+            account_name: req.body.accountName,
+            notes: req.body.notes
         };
         cashTransSaver.saveCashTransaction(data).then((status: boolean) => {
             if (status) {
