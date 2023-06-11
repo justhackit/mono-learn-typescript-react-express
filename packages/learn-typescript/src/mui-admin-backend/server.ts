@@ -27,8 +27,14 @@ app.get("/ping", (req, res) => {
 app.post("/cashtransactions", (req: Request, res: Response) => {
     try {
         console.log("request received :" + JSON.stringify(req.body as string))
-        let data: CashTransaction = req.body;
-        data.account_name = "CASH"
+        let data: CashTransaction = {
+            transDate: req.body.transDate,
+            description: req.body.description,
+            amount: req.body.amount,
+            trans_type: req.body.transType,
+            category: req.body.category,
+            account_name: req.body.accountName
+        };
         cashTransSaver.saveCashTransaction(data).then((status: boolean) => {
             if (status) {
                 res.send('{"status":"Success","message":"Cash transaction recorded sucessfully"}')

@@ -16,10 +16,12 @@ class CashTransSaver {
         this.pool = new pg_1.Pool();
         this.pool = new pg_1.Pool({
             user: "postgresadmin",
-            host: "localhost",
+            host: "postgres-service",
+            //host: "localhost",
+            //host: "host.docker.internal",
             database: "postgres",
             password: "Secret_123",
-            port: 5433,
+            port: 5432,
         });
     }
     saveCashTransaction(trans) {
@@ -29,10 +31,12 @@ class CashTransSaver {
             trans_type, category, account_name) VALUES($1,$2,$3,$4,$5,$6) RETURNING *';
             const values = [trans.transDate, trans.description,
                 trans.amount, trans.trans_type, trans.category, trans.account_name];
-            console.log("Values : " + values);
             const result = yield this.pool.query(text, values);
-            console.log(result);
-            return result.rowCount > 1;
+            if (result.rowCount == 0) {
+                console.log("No rows inserted");
+                return false;
+            }
+            return true;
         });
     }
 }
