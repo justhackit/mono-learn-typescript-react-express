@@ -80,7 +80,7 @@ const CashTransaction = (props) => {
           autoHideDuration={6000}
           onClose={() => handleNotification()}
           message="Transaction Submitted"
-          anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
         />
       )}
       {props.postStatus && props.postStatus.status === 'Error' && (
@@ -89,7 +89,7 @@ const CashTransaction = (props) => {
           autoHideDuration={6000}
           onClose={() => handleNotification()}
           message="ERROR while submitting transaction"
-          anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
         />
       )}
       <Box display="flex" flexDirection="column">
