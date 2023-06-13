@@ -1,4 +1,9 @@
-import { SIGN_OUT, SIGN_IN, POST_TRANSACTION } from './types';
+import {
+  SIGN_OUT,
+  SIGN_IN,
+  POST_TRANSACTION,
+  RESET_TRANSACTION,
+} from './types';
 import omniAppService from '../apis/omniAppService';
 
 export const signIn = (user) => {
@@ -33,11 +38,22 @@ export const signOut = () => {
 
 export const submitCashTransaction = (transactionPayload) => {
   return async function (dispatch, getState) {
-    const response = await omniAppService.post(
-      '/cashtransactions',
-      transactionPayload
-    );
-    console.log('response: ' + JSON.stringify(response.data));
-    dispatch({ type: POST_TRANSACTION, payload: response.data.status });
+    try {
+      const response = await omniAppService.post(
+        '/cashtransactions',
+        transactionPayload
+      );
+      console.log('response: ' + JSON.stringify(response.data));
+      dispatch({ type: POST_TRANSACTION, payload: response.data.status });
+    } catch (err) {
+      dispatch({ type: POST_TRANSACTION, payload: 'Error' });
+    }
+  };
+};
+
+export const resetPostTransactionState = () => {
+  return {
+    type: RESET_TRANSACTION,
+    payload: '',
   };
 };

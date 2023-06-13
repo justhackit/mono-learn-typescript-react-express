@@ -10,7 +10,10 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import { submitCashTransaction } from '../../redux-actions';
+import {
+  submitCashTransaction,
+  resetPostTransactionState,
+} from '../../redux-actions';
 
 const CashTransaction = (props) => {
   const buildInitialState = () => {
@@ -25,6 +28,7 @@ const CashTransaction = (props) => {
     };
   };
   const [cashTransaction, setCashTransaction] = useState(buildInitialState());
+  const [showNotification, setShowNotification] = useState(true);
   const handleCategoryChange = (event) => {
     setCashTransaction({
       ...cashTransaction,
@@ -54,6 +58,10 @@ const CashTransaction = (props) => {
     setCashTransaction(buildInitialState());
   };
 
+  const handleNotification = () => {
+    props.resetPostTransactionState();
+  };
+
   return (
     <Box
       component="form"
@@ -66,6 +74,22 @@ const CashTransaction = (props) => {
       noValidate
       autoComplete="off"
     >
+      {props.postStatus && props.postStatus.status === 'Success' && (
+        <Snackbar
+          open={showNotification}
+          autoHideDuration={6000}
+          onClose={() => handleNotification()}
+          message="Transaction Submitted"
+        />
+      )}
+      {props.postStatus && props.postStatus.status === 'Error' && (
+        <Snackbar
+          open={showNotification}
+          autoHideDuration={6000}
+          onClose={() => handleNotification()}
+          message="ERROR while submitting transaction"
+        />
+      )}
       <Box display="flex" flexDirection="column">
         <TextField
           id="outlined-basic"
@@ -148,6 +172,7 @@ const mapStateToProps = (state) => {
   return { postStatus: state.postTransStatus };
 };
 
-export default connect(mapStateToProps, { submitCashTransaction })(
-  CashTransaction
-);
+export default connect(mapStateToProps, {
+  submitCashTransaction,
+  resetPostTransactionState,
+})(CashTransaction);
