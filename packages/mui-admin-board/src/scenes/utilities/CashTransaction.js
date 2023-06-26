@@ -29,6 +29,7 @@ const CashTransaction = (props) => {
   };
   const [cashTransaction, setCashTransaction] = useState(buildInitialState());
   const [showNotification, setShowNotification] = useState(true);
+  const [postInProgressBackdrop, setPostInProgressBackdrop] = useState(false);
   const handleCategoryChange = (event) => {
     setCashTransaction({
       ...cashTransaction,
@@ -59,6 +60,9 @@ const CashTransaction = (props) => {
   };
 
   const handleNotification = () => {
+    if (props.postStatus && props.postStatus.status === 'Success') {
+      handleClearCashTransaction();
+    }
     props.resetPostTransactionState();
   };
 
@@ -77,7 +81,7 @@ const CashTransaction = (props) => {
       {props.postStatus && props.postStatus.status === 'Success' && (
         <Snackbar
           open={showNotification}
-          autoHideDuration={6000}
+          autoHideDuration={4000}
           onClose={() => handleNotification()}
           message="Transaction Submitted"
           anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
@@ -86,7 +90,7 @@ const CashTransaction = (props) => {
       {props.postStatus && props.postStatus.status === 'Error' && (
         <Snackbar
           open={showNotification}
-          autoHideDuration={6000}
+          autoHideDuration={4000}
           onClose={() => handleNotification()}
           message="ERROR while submitting transaction"
           anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
