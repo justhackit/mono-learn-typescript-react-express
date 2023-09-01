@@ -2,34 +2,28 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   labels:
-    app: learnmui-app-deployment
-  name: learnmui-app-deployment
+    app: learntsc-app-deployment
+  name: learntsc-app-deployment
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: learnmui-app-deployment
+      app: learntsc-app-deployment
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        app: learnmui-app-deployment
+        app: learntsc-app-deployment
     spec:
       containers:
-        - name: learnmui-app-deployment
-          image: ajayedap/playground:learn-mui-adminboard
+        - name: learntsc-app-deployment
+          image: ajayedap/playground:learn-typescript
           args:
-            - 'nginx'
-            - '-g'
-            - 'daemon off;'
+            - 'node'
+            - 'build/mui-admin-backend/server.js'
           #We don't need env here, but just keeping it.
           env:
-            - name: COMMS_EMAIL_ID
-              valueFrom:
-                secretKeyRef:
-                  name: gmail-pwd-secret
-                  key: emailid
             - name: COMMS_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -38,3 +32,17 @@ spec:
           imagePullPolicy: Always
       imagePullSecrets:
         - name: dockercreds
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: learntsc-app-service
+  labels:
+    app: learntsc-app-service
+spec:
+  type: ClusterIP
+  selector:
+    app: learntsc-app-deployment
+  ports:
+    - port: 3000
+      targetPort: 3000

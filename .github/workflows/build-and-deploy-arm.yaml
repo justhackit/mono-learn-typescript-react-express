@@ -1,0 +1,75 @@
+name: Build and Deploy
+on:
+  push:
+    branches:
+      - main-arm
+    paths:
+      - '.github/workflows/*'
+      - 'packages/mui-admin-board/**'
+      #- 'packages/learn-typescript/**'
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Path fiters
+        id: path_filters
+        uses: dorny/paths-filter@v2
+        with:
+          filters: |
+            learn-typescript:
+              - 'packages/learn-typescript/**'
+            mui-admin-board:
+              - 'packages/mui-admin-board/**'
+
+      # https://github.com/docker/setup-qemu-action
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      # https://github.com/docker/setup-buildx-action
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Install these as needed by node-gyp for arm64
+        run: sudo apt-get install -y make gcc python3.6
+
+      - name: just some tests
+        run: |
+          make --version
+          gcc --version
+          python3 --version
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+      - if: steps.path_filters.outputs.mui-admin-board == 'true'
+        name: Build and push learn-mui-adminboard to Dockerhub
+        uses: docker/build-push-action@v4
+        with:
+          context: ./packages/mui-admin-board/
+          file: ./packages/mui-admin-board/Dockerfile
+          push: true
+          platforms: linux/arm64
+          tags: |
+            ${{ secrets.DOCKER_HUB_USERNAME }}/cloudlifter-images:learn-mui-adminboard
+
+      - name: Deploy learn-mui-adminboard to K8S
+        if: steps.path_filters.outputs.mui-admin-board == 'true'
+        run: |
+          mkdir ${HOME}/.kube
+          echo ${{secrets.GODAVARI_ARM_KUBE_CONFIG}} | base64 --decode > ${HOME}/.kube/config
+          cat ${HOME}/.kube/config
+          kubectl get pods
+          kubectl delete --ignore-not-found=true -f ./packages/mui-admin-board/deployment/learn-mui-adminboard-service.yaml
+          kubectl delete --ignore-not-found=true -f ./packages/mui-admin-board/deployment/learn-mui-adminboard-deployment.yaml          
+          kubectl apply -f ./packages/mui-admin-board/deployment/learn-mui-adminboard-deployment.yaml
+          kubectl apply -f ./packages/mui-admin-board/deployment/learn-mui-adminboard-service.yaml
+
+      - name: Just to Debug
+        run: |
+          echo "${{toJSON(steps)}}"

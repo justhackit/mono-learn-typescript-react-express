@@ -6,22 +6,11 @@
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
-    "@faker-js/faker": "^7.6.0",
-    "@fullcalendar/daygrid": "^6.1.5",
-    "@fullcalendar/list": "^6.1.5",
-    "@fullcalendar/timegrid": "^6.1.5",
     "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.11.14",
-    "@mui/x-data-grid": "^6.0.3",
-    "@nivo/bar": "^0.80.0",
-    "@nivo/core": "^0.80.0",
-    "@nivo/geo": "^0.80.0",
-    "@nivo/line": "^0.80.0",
-    "@nivo/pie": "^0.80.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
-    "@types/google.maps": "^3.52.5",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
@@ -38,20 +27,14 @@
     "react-router-dom": "6",
     "react-scripts": "5.0.1",
     "redux": "^4.2.1",
-    "web-vitals": "^2.1.0",
-    "yup": "^1.0.2"
+    "redux-thunk": "^2.4.2",
+    "web-vitals": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [

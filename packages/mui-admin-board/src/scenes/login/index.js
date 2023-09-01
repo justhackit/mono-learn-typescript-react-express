@@ -10,7 +10,7 @@ const LoginPage = (props) => {
   return (
     <>
       {props.isUserSignedIn ? (
-        <Navigate to="/aws_creds" replace />
+        <Navigate to="/cashtransaction" replace />
       ) : (
         <Box
           display="flex"
